@@ -1,0 +1,42 @@
+FORTINET LINUX VPN CLINET WRAPPER
+=================================
+
+What it is
+----------
+
+If you use the fortinet ssl client's linux cli program, this script wraps on top of
+it, so that it incessantly runs the client after a tunnel is broken.
+
+How I use it
+~~~~~~~~~~~~
+
+I run the fortinet ssl client in my virtual box ubuntu, in my Windows laptop. I
+generally close the lid/open the lid, to which windows-8 niclely responds by sleep'ing
+and waking up. However, the ssl client inside the virtual box dies and I have to 
+manually fire it back. Also, sometimes the connection is flaky and the vpn gets
+disconnected. This script wraps the client and re-lauches it whenever it finds it down.
+
+This coupled with mosh/tmux keeps an always-on connectivity to my linux-host in my vpn.
+The linux-host itself is another virtual box client in my office windows pc.
+
+Pre-requisites
+--------------
+This needs python 2.7+
+And imports the pexpect library.
+
+Setting it up
+-------------
+
+The following inputs needs to be setup
+
+* You windows domain name for the vpn login
+* You windows login name for the vpn login
+* Your local linux machine's sudo password. The client needs to be run as root.
+* The absolute path to the forticlientsslvpn_cli program
+* The vpn-server hostname/ip/port.
+
+The above information needs to be input in a credentials.py which is to be
+kept in the same directory as connect.py. A sample file is given in the repository
+which can be simply renamed from "credentials_sample.py" to "credentials.py"
+
+Happy Working!

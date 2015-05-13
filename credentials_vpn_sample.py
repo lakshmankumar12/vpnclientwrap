@@ -1,0 +1,6 @@
+domainname='domainname'
+username='username'
+supass='supassforyourmachine'
+vpnpass='vpnpasswordforyouraccount'
+program='/abs/path/to/forticlientsslvpn_cli'
+servername='ssl_server:port'
