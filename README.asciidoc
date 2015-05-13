@@ -35,8 +35,8 @@ The following inputs needs to be setup
 * The absolute path to the forticlientsslvpn_cli program
 * The vpn-server hostname/ip/port.
 
-The above information needs to be input in a credentials.py which is to be
+The above information needs to be input in a credentials_vpn.py which is to be
 kept in the same directory as connect.py. A sample file is given in the repository
-which can be simply renamed from "credentials_sample.py" to "credentials.py"
+which can be simply renamed from "credentials_vpn_sample.py" to "credentials_vpn.py"
 
 Happy Working!

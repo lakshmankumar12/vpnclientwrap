@@ -6,7 +6,7 @@ import pexpect
 try:
   import credentials_vpn
 except ImportError:
-  print "Please have a creditials.py as in Readme"
+  print "Please have a creditials_vpn.py as in Readme"
   sys.exit(1)
 
 def general_expect(child, expect_list, intent_desc, eof_ok=0, print_output=0, timeout=0, timeout_ok=0):
