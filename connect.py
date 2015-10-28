@@ -61,6 +61,11 @@ tunnel_done=r'STATUS::Tunnel running'
 
 userarg=credentials_vpn.domainname+'\\'+credentials_vpn.username
 while True:
+  spawn_args=[credentials_vpn.program,"--server",credentials_vpn.servername,"--vpnuser",userarg]
+  print "spawning: sudo ",
+  for i in spawn_args:
+    print "%s"%i,
+  print ""
   child=pexpect.spawn("sudo",[credentials_vpn.program,"--server",credentials_vpn.servername,"--vpnuser",userarg])
   vpn_pass_sent = 0
   print "waiting for passwords"
