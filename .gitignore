@@ -1,3 +1,4 @@
 credentials_vpn.py
 *.pyc
 .*.swp
+general_expect_failure

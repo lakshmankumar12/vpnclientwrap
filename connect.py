@@ -2,6 +2,10 @@
 
 import sys
 import pexpect
+import os
+
+RESOLV_CONF="/etc/resolv.conf"
+BACKUP_RESOLV_CONF="/tmp/resolv.conf.orig"
 
 try:
   import credentials_vpn
@@ -59,6 +63,23 @@ vpn_pass_expect=r'Password for VPN:'
 serv_sig_accept=r'Would you like to connect to this server\? \(Y\/N\)'
 tunnel_done=r'STATUS::Tunnel running'
 
+def save_resolv_conf():
+  print("backing %s"%RESOLV_CONF)
+  ret = os.system("cp %s %s"%(RESOLV_CONF,BACKUP_RESOLV_CONF))
+  if ret != 0:
+      print ("couldnt backup")
+      sys.exit(1)
+
+def restore_resolv_conf():
+  print("Restoring %s"%RESOLV_CONF)
+  child=pexpect.spawn("sudo",["cp",BACKUP_RESOLV_CONF,RESOLV_CONF])
+  res=general_expect(child,[sudo_pass_expect], "resolv_restore", eof_ok=1)
+  if res == 0:
+      child.sendline(credentials_vpn.supass)
+  general_expect(child,[], "resolve_restore after sudo", eof_ok=1)
+
+save_resolv_conf()
+
 userarg=credentials_vpn.domainname+'\\'+credentials_vpn.username
 while True:
   spawn_args=[credentials_vpn.program,"--server",credentials_vpn.servername,"--vpnuser",userarg]
@@ -104,4 +125,5 @@ while True:
     child.terminate()
     break
   del child
+  restore_resolv_conf()
 
